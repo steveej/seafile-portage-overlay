@@ -1,4 +1,4 @@
 seafile-portage-overlay
 =======================
 
-Portage overlay to maintain seafile ebuilds for portage
+Portage overlay to maintain seafile ebuilds
