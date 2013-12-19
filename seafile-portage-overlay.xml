@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>                                                                                                     
+<repositories version="1.0">
+	<repo priority="50" quality="experimental" status="unofficial">
+		<name>seafile-portage-overlay</name>
+		<description>Portage overlay to maintain seafile ebuilds</description>
+		<homepage>https://github.com/haiwen/seafile/</homepage>
+		<owner>
+			<email>stefanjunker86@gmail.com</email>
+		</owner>
+		<source type="git">git@github.com:steveeJ/seafile-portage-overlay.git</source>
+	</repo>
+</repositories> 
