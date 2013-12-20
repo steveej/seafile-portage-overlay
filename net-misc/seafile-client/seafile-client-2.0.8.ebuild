@@ -24,6 +24,6 @@ pkg_setup() {
 }
 
 src_compile() {
-	cmake -DCMAKE_BUILD_TYPE=Release || die "src_compile failed"
+	cmake . || die "src_compile failed"
 	emake -j1 || die "emake failed"
 }
