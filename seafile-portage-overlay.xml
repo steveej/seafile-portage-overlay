@@ -7,6 +7,6 @@
 		<owner>
 			<email>stefanjunker86@gmail.com</email>
 		</owner>
-		<source type="git">git@github.com:steveeJ/seafile-portage-overlay.git</source>
+		<source type="git">https://github.com/steveeJ/seafile-portage-overlay.git</source>
 	</repo>
 </repositories> 
