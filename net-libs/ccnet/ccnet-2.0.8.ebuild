@@ -23,6 +23,11 @@ DEPEND="=net-libs/libsearpc-${PV}
 
 RDEPEND=""
 
+pkg_setup() {
+	python_set_active_version 2
+	python_pkg_setup
+}
+
 src_prepare() {
 	./autogen.sh || die "src_prepare failed"
 }
