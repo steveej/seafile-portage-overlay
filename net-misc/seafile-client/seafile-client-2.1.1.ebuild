@@ -8,13 +8,13 @@ inherit eutils python autotools
 
 DESCRIPTION="Cloud file syncing software"
 HOMEPAGE="http://www.seafile.com"
-SRC_URI="https://github.com/haiwen/${PN}/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+SRC_URI="https://github.com/haiwen/${PN}/archive/v${PV}-testing.tar.gz -> ${PN}-${PV}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~x86"
 
-DEPEND="=net-misc/seafile-${PV}[-client]"
+DEPEND=">=net-misc/seafile-${PV}[-client]"
 
 RDEPEND=""
 
