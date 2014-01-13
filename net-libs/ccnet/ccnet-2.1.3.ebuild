@@ -8,7 +8,7 @@ inherit eutils autotools python
 
 DESCRIPTION="Networking library for Seafile"
 HOMEPAGE="http://www.seafile.com"
-SRC_URI="https://github.com/haiwen/${PN}/archive/v${PV}-testing.tar.gz -> ${PN}-${PV}.tar.gz"
+SRC_URI="https://github.com/haiwen/${PN}/archive/v${PV}-testing.tar.gz -> ${PN}-${PV}-testing.tar.gz"
 
 SLOT="0"
 LICENSE="GPL-2"
