@@ -13,7 +13,7 @@ SRC_URI="https://github.com/haiwen/${PN}/archive/v${PV}.tar.gz -> ${PN}-${PV}.ta
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~x86"
-IUSE="gui gtk console server client python"
+IUSE="console server client python riak fuse"
 
 DEPEND="
 	>=dev-lang/python-2.5[sqlite]
@@ -21,14 +21,17 @@ DEPEND="
 	>=net-libs/libevhtp-1.1.6
 	sys-devel/gettext
 	virtual/pkgconfig
+	dev-libs/jansson
 	client? ( !net-misc/seafile-client =net-libs/ccnet-${PV}[client] )
 	server? ( 	( =net-libs/ccnet-${PV}[server] )
+				=dev-python/django-1.5*
 				www-servers/gunicorn	
 				dev-python/simplejson
 				dev-python/mako
 				dev-python/webpy
 				dev-python/Djblets
 				dev-python/chardet	)"
+
 
 RDEPEND=""
 
@@ -39,12 +42,14 @@ pkg_setup() {
 
 src_prepare() {
 	./autogen.sh || die "src_prepare failed"
+	epatch "${FILESDIR}/${PV}-seafile-admin-datadir-pathfix.patch"
 }
 
 src_configure() {
 	econf \
-		$(use_enable gui) \
-		$(use_enable gtk) \
+		$(use_enable fuse) \
+		$(use_enable riak) \
+		$(use_enable client) \
 		$(use_enable server) \
 		$(use_enable python) \
 		$(use_enable console) \ 
@@ -55,4 +60,13 @@ src_compile() {
 	mkdir ${S}/tmpbin
 	ln -s $(echo $(whereis valac-) | grep -oE "[^[[:space:]]*$") ${S}/tmpbin/valac
 	PATH="${S}/tmpbin/:$PATH" emake -j1 || die "emake failed"
+}
+
+src_install() {
+	emake DESTDIR="${D}" install
+	SEAFILE_SHARE_PATH="/usr/share/seafile"
+	insinto ${SEAFILE_SHARE_PATH}/${PV}
+	doins -r ${S}/scripts
+	dodoc ${S}/doc/cli-readme.txt 
+	doman ${S}/doc/*.1
 }
