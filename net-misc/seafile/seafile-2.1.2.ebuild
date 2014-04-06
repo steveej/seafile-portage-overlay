@@ -15,18 +15,20 @@ SLOT="0"
 KEYWORDS="~x86"
 IUSE="gui gtk console server client python"
 
-DEPEND="client? ( !net-misc/seafile-client )
+DEPEND="
 	>=dev-lang/python-2.5[sqlite]
-	( =net-libs/ccnet-${PV}[python,client] )
-	dev-python/simplejson
-	dev-python/mako
-	dev-python/webpy
-	dev-python/Djblets
-	dev-python/chardet
-	www-servers/gunicorn
+	( =net-libs/ccnet-${PV}[python] )
 	>=net-libs/libevhtp-1.1.6
 	sys-devel/gettext
-	dev-util/pkgconfig"
+	virtual/pkgconfig
+	client? ( !net-misc/seafile-client =net-libs/ccnet-${PV}[client] )
+	server? ( 	( =net-libs/ccnet-${PV}[server] )
+				www-servers/gunicorn	
+				dev-python/simplejson
+				dev-python/mako
+				dev-python/webpy
+				dev-python/Djblets
+				dev-python/chardet	)"
 
 RDEPEND=""
 

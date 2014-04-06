@@ -19,7 +19,7 @@ DEPEND="=net-libs/libsearpc-${PV}
 	>=dev-libs/glib-2.0
 	>=dev-lang/vala-0.8
 	dev-db/libzdb
-	dev-util/pkgconfig"
+	virtual/pkgconfig"
 
 RDEPEND=""
 
