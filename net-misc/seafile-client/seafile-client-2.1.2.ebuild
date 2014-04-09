@@ -14,7 +14,7 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~x86"
 
-DEPEND="=net-misc/seafile-${PV}[-client] dev-libs/jansson"
+DEPEND=">=net-misc/seafile-${PV}[client] dev-libs/jansson"
 
 RDEPEND=""
 
