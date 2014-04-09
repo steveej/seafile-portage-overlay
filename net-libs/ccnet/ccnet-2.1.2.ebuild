@@ -34,12 +34,11 @@ src_prepare() {
 
 src_configure() {
 	econf 	$(use_enable server) \
-		$(use_enable client) \
-		$(use_enable python) \
-		$(use_enable cluster) \
-		$(use_enable ldap) \
-		--enable-console \
-		|| die "econf failed"
+			$(use_enable client) \
+			$(use_enable python) \
+			$(use_enable cluster) \
+			$(use_enable ldap) \
+			--enable-console
 }
 
 src_compile() {
