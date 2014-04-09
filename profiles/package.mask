@@ -1,0 +1,4 @@
+# Stefan Junker  <code@stefanjunker.de>
+# This combination does not allow seafile-client to work properly.
+=net-misc/seafile-2.1.2
+=net-misc/seafile-client-2.1.2
