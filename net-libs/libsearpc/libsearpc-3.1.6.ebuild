@@ -4,7 +4,10 @@
 
 EAPI=5
 
-inherit autotools-utils python
+PYTHON_COMPAT=( python{2_6,2_7} )
+PYTHON_REQ_USE="sqlite(+)"
+
+inherit autotools-utils python-single-r1
 
 RELEASE_COMMIT_HASH="8998e7b2c5587f0b94c48db24e2952d08def5add"
 
@@ -16,12 +19,13 @@ SLOT="0"
 LICENSE="GPL-3"
 KEYWORDS="~x86 ~amd64"
 
-DEPEND="<dev-lang/python-3
+RDEPEND="${PYTHON_DEPS}
 	>=dev-libs/glib-2.16
 	>=dev-libs/jansson-2.1.1
 	virtual/pkgconfig"
+DEPEND="${RDEPEND}"
 
-RDEPEND=""
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 AUTOTOOLS_AUTORECONF=1
 
@@ -30,8 +34,3 @@ PATCHES=(
 )
 
 S="${WORKDIR}/${PN}-${RELEASE_COMMIT_HASH}"
-
-pkg_setup() {
-	python_set_active_version 2
-	python_pkg_setup
-}

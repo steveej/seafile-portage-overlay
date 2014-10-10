@@ -4,7 +4,10 @@
 
 EAPI=5
 
-inherit autotools-utils python
+PYTHON_COMPAT=( python{2_6,2_7} )
+PYTHON_REQ_USE="sqlite(+)"
+
+inherit autotools-utils python-single-r1
 
 DESCRIPTION="Networking library for Seafile"
 HOMEPAGE="http://www.seafile.com"
@@ -15,24 +18,20 @@ LICENSE="GPL-2"
 KEYWORDS="~x86 ~amd64"
 IUSE="+client +server ldap demo"
 
-DEPEND="=net-libs/libsearpc-${PV}
+RDEPEND="=net-libs/libsearpc-${PV}
 	>=dev-libs/glib-2.16
 	>=dev-lang/vala-0.8
 	>=dev-db/libzdb-2.10
 	virtual/pkgconfig
-	<dev-lang/python-3
+	${PYTHON_DEPS}
 	>=dev-libs/libevent-2
 	ldap? ( net-nds/openldap )"
+DEPEND="${RDEPEND}"
 
-RDEPEND=""
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 AUTOTOOLS_IN_SOURCE_BUILD=1
 AUTOTOOLS_AUTORECONF=1
-
-pkg_setup() {
-	python_set_active_version 2
-	python_pkg_setup
-}
 
 PATCHES=(
 	"${FILESDIR}"/libccnet.pc.patch
@@ -54,6 +53,6 @@ src_compile() {
 	mkdir ${S}/tmpbin
 	ln -s $(echo $(whereis valac-) | grep -oE "[^[[:space:]]*$") ${S}/tmpbin/valac
 	export PATH="${S}/tmpbin/:$PATH"
-	
+
 	autotools-utils_src_compile
 }

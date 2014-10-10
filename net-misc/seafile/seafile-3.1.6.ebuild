@@ -4,7 +4,10 @@
 
 EAPI=5
 
-inherit autotools-utils python
+PYTHON_COMPAT=( python{2_6,2_7} )
+PYTHON_REQ_USE="sqlite(+)"
+
+inherit autotools-utils python-single-r1
 
 DESCRIPTION="Cloud file syncing software"
 HOMEPAGE="http://www.seafile.com"
@@ -15,8 +18,8 @@ SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE="+server +client +fuse"
 
-DEPEND="
-	<dev-lang/python-3[sqlite]
+RDEPEND="
+	${PYTHON_DEPS}
 	>=net-libs/ccnet-${PV}
 	>=net-libs/libevhtp-1.1.6
 	virtual/pkgconfig
@@ -25,18 +28,14 @@ DEPEND="
 	fuse? ( >=sys-fs/fuse-2.7.3 )
 	client? ( >=net-libs/ccnet-${PV}[client] )
 	server? ( >=net-libs/ccnet-${PV}[server] )"
+DEPEND="${RDEPEND}"
 
-REQUIRED_USE="fuse? ( server )"
-
-RDEPEND=""
+REQUIRED_USE="
+	${PYTHON_REQUIRED_USE}
+	fuse? ( server )"
 
 AUTOTOOLS_IN_SOURCE_BUILD=1
 AUTOTOOLS_AUTORECONF=1
-
-pkg_setup() {
-	python_set_active_version 2
-	python_pkg_setup
-}
 
 src_configure() {
 	local myeconfargs=(
@@ -48,19 +47,12 @@ src_configure() {
 	autotools-utils_src_configure
 }
 
-src_prepare() {
-	find -iname "*.py" -print0 | xargs -0 -L 1 sed -i 's,^#!/usr/bin/env python$,#!/usr/bin/env python2,'
-	sed -i 's,^#!/usr/bin/env python$,#!/usr/bin/env python2,' "${S}/tools/seafile-admin"
-	
-	autotools-utils_src_prepare
-}
-
 src_compile() {
 	# dev-lang/vala does not provide a valac symlink
 	mkdir ${S}/tmpbin
 	ln -s $(echo $(whereis valac-) | grep -oE "[^[[:space:]]*$") ${S}/tmpbin/valac
 	export PATH="${S}/tmpbin/:$PATH"
-	
+
 	autotools-utils_src_compile
 }
 
@@ -68,6 +60,8 @@ src_install() {
 	autotools-utils_src_install
 
 	doins -r ${S}/scripts
-	dodoc ${S}/doc/cli-readme.txt 
+	dodoc ${S}/doc/cli-readme.txt
 	doman ${S}/doc/*.1
+
+	python_fix_shebang "${ED}"
 }
