@@ -62,4 +62,12 @@ pkg_postinst() {
 		ln -s "/usr/bin/${x}"
 	done
 	cd -
+
+	elog "seafile-server has been installed to /opt/seafile"
+	elog "To configure seafile please run:"
+	elog "cd /opt/seafile/seafile-server && ./setup-seafile[-mysql].sh"
+	elog "For more information consult the official installation guide:"
+	elog "http://manual.seafile.com/deploy/README.html"
+
+	ewarn "Since this ebuild is rather new: Please make sure to backup /opt/seafile before upgrading this package!"
 }
