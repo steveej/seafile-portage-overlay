@@ -3,6 +3,6 @@ seafile-portage-overlay
 
 Portage overlay to maintain seafile ebuilds.
 
-Can be installed using layman with the following command:
+The overlay is in the official list and can be added via layman:
 
-```layman -f -o https://raw.github.com/steveeJ/seafile-portage-overlay/master/seafile-portage-overlay.xml -a seafile```
+```layman -a seafile```
