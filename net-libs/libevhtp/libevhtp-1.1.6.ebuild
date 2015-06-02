@@ -8,7 +8,7 @@ inherit eutils cmake-utils
 
 DESCRIPTION="Flexible replacement for libevent's httpd API"
 HOMEPAGE="https://github.com/ellzey/libevhtp/"
-SRC_URI="https://github.com/ellzey/libevhtp/archive/${PV}.zip"
+SRC_URI="https://github.com/ellzey/libevhtp/archive/${PV}.zip -> ${PN}-${PV}.zip"
 
 SLOT="0"
 LICENSE="GPL-2"
